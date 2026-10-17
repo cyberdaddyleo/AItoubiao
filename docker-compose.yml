@@ -1,0 +1,19 @@
+services:
+  bidding:
+    build:
+      context: .
+      args:
+        # 国内服务器建议使用镜像源
+        PIP_INDEX: https://mirrors.aliyun.com/pypi/simple/
+    image: ai-bidding-system:1.0
+    container_name: ai-bidding-system
+    restart: unless-stopped
+    ports:
+      - "8600:8600"
+    environment:
+      TZ: Asia/Shanghai
+      # 首次启动时的管理员密码；不填则随机生成，写在 data/初始管理员密码.txt
+      BID_ADMIN_PASSWORD: ${BID_ADMIN_PASSWORD:-}
+    volumes:
+      # 数据库、上传文件、导出文件、公告快照都在这里，备份这个目录即可
+      - ./data:/app/data

@@ -1,0 +1,6 @@
+# 换行符：Windows 脚本必须是 CRLF，shell 脚本必须是 LF
+*.bat text eol=crlf
+*.sh text eol=lf
+*.py text eol=lf
+*.icns binary
+*.png binary
